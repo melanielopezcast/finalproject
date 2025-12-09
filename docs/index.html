@@ -2,133 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Mini Site — HTML Basics</title>
-  <link rel="stylesheet" href="lopezcastano_style.css">
+  <title>Mini Site — Cuban Spanish</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a id="top"></a> <!-- back-to-top anchor -->
   <!-- 1) HEADINGS & PARAGRAPHS -->
   <header>
-  <h1>My Mini Site</h1>
+  <h1>Cuban Spanish - Melanie Lopez-Castano</h1>
     <nav>
      <a href="#About">About</a>
-     <a href="#Education">Education</a>
-     <a href="#Clinical & Research Experience">Clinicial & Research Experience</a>
-     <a href="#Leadership & Involvement">Leadership & Campus Involvement</a>
-     <a href="#Employment Experience">Employment Experience</a>
-     <a href="#Service & Volunteer Work">Service & Volunteer Work</a>
-     <a href="#Contact">Contact</a>
+     <a href="#Dataset">Dataset</a>
+     <a href="#Methods">Methods</a>
+     <a href="#Results & Interpretation">Results & Interpretation</a>
   </nav>
   </header>
   <main>
     
   <section id="About">
-<h2>About Me</h2>
-<p>Hello! My name is Melanie Lopez-Castano. Welcome to my website/resume!</p>
-<p>I grew up in Louisville, Kentucky and now attend the University of Kentucky, studying communication sciences and disorders and linguistics. I am currently in the process of applying for graduate school to receive a Masters of Speech-Language Pathology, so this website serves as my resume!</p>
-  <p>
-    <img src="lin301me.png" alt="This is me!">
-  </p>
+<h2>About</h2>
+<p>Hello, welcome to my research website! This project discusses orthographic and phonological changes in Cuban Spanish, specifically looking at -ado -> -ao and other variants.</p>
   </section>
   
 
-<section id="Education">
-<h2>Education</h2>
-<p><strong>University of Kentucky</strong> - Lexington, KY<p/>
-<p>B.H.S. in Communication Sciences and Disorders & Linguistics (Expected May 2026)</p>
-<p><strong>Atherton High School</strong> - Louisville, KY</p>
-<p>High School Diploma, (2022)</p>
+<section id="Dataset">
+<h2>Dataset</h2>
+<p>I used El Corpus Del Español to collect linguistic data from online blog-style postings, filtering for posts from Cuba. I looked up specific words that follow this pattern, like "pescado" and "cuidado", as well as their simplified outputs "pescao" and "cuidao". Taking about 30 blog posts, I combined them in a text file to further clean the data. </p>
 </section>
 
 
-<section id="Clinical & Research Experience">                
-<h2>Clinical & Research Experience</h2>
-<p><strong>AAC (All About Communication) Lab and Rehab Makerspace - University of Kentucky (2023) </strong>
-<p>Research Supervisor | Dr. Mary Jo Cooley Hidecker</p>
+<section id="Methods">                
+<h2>Methods</h2>
+<p>This analysis explores some common sound changes in Cuban Spanish in casual speech, specifically in written orthography. After collecting excerpts from El Corpus del Español, I cleaned the raw text by: </p>
 <ul>
-  <li>Adapt battery-operated toys to become switch-adapted for children with complex communication needs.</li>
-  <li>Create weighted stuffed animals and keyguards for AAC devices to improve accessibility.</li>
-  <li>Contribute to research and practical applications in augmentative and alternative communication.</li>
-</ul> </p>
-<p><strong>Observation: Marshall Pediatrics with Nicole Haney - Lexington, KY (Jan-Mar 2024)</strong></p>
-<ul>
-  <li>Observed outpatient pediatric speech-language pathologists treating patients ages 2 to 16 years old</li>
-  <li>Assisting clinicians during therapy whenever appropriate.</li>
+  <li>converting text to lowercase</li>
+  <li>removing punctuation, numerical figures, and spaces</li>
+  <li>tokenizing each individual word in text</li>
+  <li>keeping accent marks (comparing qué vs que)</li>
 </ul>
-<p><strong>Shadowing: The Hearing and Speech Center with Shelby Rutledge - Lexington, KY (Jan-Apr 2024)</strong> <p/>
+<p>In python, I used <strong>'re'</strong> to clean my text and locate spelling patterns reflecting the phonological changes ('pescao' from 'pescado'). Keeping accents and specific Spanish characters 'ñ' was important when cleaning this text to compare forms later. I got frequency counts with a word_fre() function, looping through tokens and counting them. To test the sound changes, I defined a list of target words (e.g., pescao ~ pescado) and then extracted all tokens ending in:<strong> -ao, -aos (from -ado/-ados), -aa, -aas (hypothetical -ada/-adas).</strong></p>
+<p>I did searches for all forms (-ao, -aa, -aos, and -aas), example of code line below:</p>
 <ul>
-  <li>Supported Mrs. Shelby with operating her “Tiny Tots Talking” program in The Hearing and Speech Center’s Early Learning Center and Preschool classrooms</li>
-  <li>Used play-based strategies and singing to promote speech and language development.</li>
-</ul>
-<p><strong>Observation: UK CSD Academic Clinic - Lexington, KY (Aug-Dec 2025)</strong></p>
-<ul>
-  <li>Observing Speech-Language Pathology graduate students from the University of Kentucky assess and treat clients in the UK CSD Clinic.</li>
-  <li>Gained insight into evaluations qnd treatment in speech-language pathology.</li>
+  <li>ao_forms = [w for w in cuban_words if re.search(r'ao$', w)]</li>
 </ul>
 </section>
 
 
-<section id="Leadership & Campus Involvement">
-<h2>Leadership & Campus Involvement</h2>
-<p><strong>Girl Up Lexington</strong> - Co-founder and Outreach Coordinator (2023-2024)</p>
+<section id="Results & Interpretation">
+<h2>Results & Interpretation</h2>
+<p>Visualization, key numerical results. what the results mean and why these patterns appear. "What I'd do next"</p>
+<img src="frequency.png" alt="Frequency of Reduced vs Standard Forms">
+<p>The graph above shows frequency for all 8 standard and reduced forms that I analyzed.</p>
+<img src="pos.png" alt="POS Distribution for Standard vs. Reduced Endings">
+<p>The graph above shows the part of speech distribution for all 8 forms.</p>
+
 <ul>
   <li>Co-founded organization promoting gender equity and leadership development for women.</li>
   <li>Organized monthly meetings, community events, and member recruitment initiatives.</li>
 </ul>
-<p><strong>Radio DJ | WRFL 88.1 FM, University of Kentucky</strong> (2023-Present)</p>
-<ul>
-  <li>Host weekly on-air radio segments featuring diverse music and community programming.</li>
-  <li>Develop and deliver engaging spoken content to live audiences, strengthening public speaking and communication skills.</li>
-  <li>Operate studio equipment and manage broadcast scheduling under FCC guidelines.</li>
-</ul>
-<p><strong>National Student Speech-Language Hearing Associate (NSSLHA) </strong>- General Member (2023-2025)</p>
-<ul>
-  <li>Participated in professional development and fundraising events for the CSD community.</li>
-</ul>
-
 </section>
-
-<section id="Employment Experience">
-<h2>Employment Experience</h2>
-<p><strong>Server | Grimaldi's Coal Brick Oven Pizzeria</strong> - Lexington, KY (2023-Now)</p>
-<ul>
-  <li>Provide high-quality customer service in a fast-paced environment.</li>
-  <li>Develop teamwork, communication, and multitasking skills.</li>
-</ul>
-<p><strong>Toddler Teacher | Cadence Academy</strong> - Louisville, KY (Summer of 2023) </p>
-<ul>
-  <li>Supervised and engaged toddlers in play-based learning activities.</li>
-  <li>Supported early language and social skill development in a classroom setting.</li>
-</ul>
-<p><strong>At-Home Childcare and Nannying</strong> - Louisville & Lexington, KY (2021-Present)</p>
-<ul>
-  <li>Provide individualized care and educational play for children ages 1–10.</li>
-  <li>Foster safe, nurturing environments supporting developmental milestones, and including basic Spanish use in conversation.</li>
-</ul>
-</section>
-
-<section id="Service & Volunteer Work">
-<h2>Service & Volunteer Work</h2>
-<p><strong>God's Pantry Food Bank </strong>- Volunteer</p>
-<ul>
-  <li>Sorted and packed food items, organized canned goods and nonperishables, packaged meals for those that need food assistance.</li>
-</ul>
-<p><strong>Girl On The Run Lexington </strong>- Volunteer</p>
-<ul>
-  <li>Created inspirational posters and cheered on runners at races to promote young girls' involvement in sports.</li>
-</ul>
-<p><strong>Coffee and Donuts with Dr. Melanie Hughes </strong>- Participant</p>
-<ul>
-  <li>Discussed Dr. Hughes’ policy brief on female representation in environmental and climate change ministries, her contribution to political representation of women worldwide, and her experience working for the United Nations.</li>
-</ul> 
-</section>
-
-<section id="Contact">
-  <h2 class="tagline">Contact</h2>
-  <p>
-    Email me at <a href="mailto:mtlo230@uky.edu">mtlo230@uky.edu </a>| or text/call 502-807-8713. 
-  </p>
-  </section>
 </main>
 
   <footer>
