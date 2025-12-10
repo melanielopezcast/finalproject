@@ -21,45 +21,52 @@
     
   <section id="About">
 <h2>About</h2>
-<p>Hello, welcome to my research website! This project discusses orthographic and phonological changes in Cuban Spanish, specifically looking at -ado -> -ao and other variants.</p>
+<p>Hello, welcome to my research website! This project discusses orthographic and phonological changes in Cuban Spanish, specifically looking at -ado -> -ao and other variants. I also will be looking at accented vs. unaccented spellings (e.g., qué vs. que) to show differences in frequency. My main hypothesis is that unaccented spellings will be more frequent, since informal writing often omits written accents. I also expect reduced forms will appear more often than standard forms, reflecting well-documented Cuban Spanish lenition patterns.</p>
   </section>
   
 
 <section id="Dataset">
 <h2>Dataset</h2>
-<p>I used El Corpus Del Español to collect linguistic data from online blog-style postings, filtering for posts from Cuba. I looked up specific words that follow this pattern, like "pescado" and "cuidado", as well as their simplified outputs "pescao" and "cuidao". Taking about 30 blog posts, I combined them in a text file to further clean the data. </p>
+<p>I used El Corpus Del Español to collect linguistic data from online blog-style postings, filtering for posts from Cuba. These posts included a variety of topics, spanning from political commentary to sports and media. I looked up specific words that follow this pattern, like "pescado" and "cuidado", as well as their simplified outputs "pescao" and "cuidao". Taking about 40 blog posts, I combined them in a text file to further clean and analyze the data. </p>
 </section>
 
 
 <section id="Methods">                
 <h2>Methods</h2>
-<p>This analysis explores some common sound changes in Cuban Spanish in casual speech, specifically in written orthography. After collecting excerpts from El Corpus del Español, I cleaned the raw text by: </p>
+<p>This analysis explores some common sound changes in Cuban Spanish in casual speech (blogs, forums, news), specifically in written orthography. After collecting excerpts from El Corpus del Español, I cleaned the raw text by: </p>
 <ul>
   <li>converting text to lowercase</li>
   <li>removing punctuation, numerical figures, and spaces</li>
   <li>tokenizing each individual word in text</li>
   <li>keeping accent marks (comparing qué vs que)</li>
 </ul>
-<p>In python, I used <strong>'re'</strong> to clean my text and locate spelling patterns reflecting the phonological changes ('pescao' from 'pescado'). Keeping accents and specific Spanish characters 'ñ' was important when cleaning this text to compare forms later. I got frequency counts with a word_fre() function, looping through tokens and counting them. To test the sound changes, I defined a list of target words (e.g., pescao ~ pescado) and then extracted all tokens ending in:<strong> -ao, -aos (from -ado/-ados), -aa, -aas (hypothetical -ada/-adas).</strong></p>
-<p>I did searches for all forms (-ao, -aa, -aos, and -aas), example of code line below:</p>
-<ul>
-  <li>ao_forms = [w for w in cuban_words if re.search(r'ao$', w)]</li>
-</ul>
+<p>In python, I used <strong>'re'</strong> to clean my text and locate spelling patterns reflecting the phonological changes ('pescao' from 'pescado'). Keeping accents and specific Spanish characters 'ñ' was important when cleaning this text to compare forms later. I got frequency counts with a word_freq() function, looping through tokens and counting them. To test the sound changes, I defined a list of target words (e.g., pescao ~ pescado) and then extracted all tokens ending in:<strong> -ao, -aos (from -ado/-ados), -aa, -aas (hypothetical -ada/-adas).</strong></p>
+<p>I did searches for all 8 forms <strong>(-ao, -ado, -aa, -ada, -aos, -ados, -adas and -aas)</strong>, example of code line below:</p>
+<p>ao_forms = [w for w in cuban_words if re.search(r'ao$', w)]</p>
+<p>
+Each token was POS-tagged using the <strong>spaCy Spanish NLP model</strong> (<code>es_core_news_sm</code>) 
+to determine whether reduced forms are more common in particular grammatical categories 
+(e.g., adjectives vs. participles). Accent minimal pairs were also identified 
+(e.g., <em>el</em> vs. <em>él</em>), and their frequencies were visualized using grouped bar charts.
+</p>
 </section>
 
 
 <section id="Results & Interpretation">
 <h2>Results & Interpretation</h2>
-<p>Visualization, key numerical results. what the results mean and why these patterns appear. "What I'd do next"</p>
 <img src="frequency.png" alt="Frequency of Reduced vs Standard Forms">
-<p>The graph above shows frequency for all 8 standard and reduced forms that I analyzed.</p>
+<p>The graph above shows frequency for all 8 standard and reduced forms that I analyzed. Reduced forms (-ao, -aos) clearly appear in the corpus, while their standard equivalents (-ado, -ados) remain more frequent overall. Notably, the predicted feminine reductions (-aa, -aas) never occur, suggesting that reduction primarily affects masculine participles (e.g., <em>pescao</em> from <em>pescado</em>).</p>
 <img src="pos.png" alt="POS Distribution for Standard vs. Reduced Endings">
-<p>The graph above shows the part of speech distribution for all 8 forms.</p>
-
+<p>The graph above shows the part of speech distribution for all 8 forms. When categorized by part of speech, reduced forms appear almost exclusively among <strong>participial adjectives and verbs</strong>, especially in everyday lexical items like <em>cansao</em> (tired) or <em>acabao</em> (finished). Nouns and other categories overwhelmingly prefer standard spellings. This suggests that reduction is not random, but tied to frequently used predicates in casual communication.</p>
+<img src="accentpairs.png" alt="Frequency of Accented vs Unaccented Pairs">
+<p>The graph above shows frequency for 5 common accented words vs their unaccented counterparts. This is showing a strong tendency to omit diacritics in informal writing. Pairs like <em>qué/que</em> and <em>más/mas</em> overwhelmingly appear in unaccented form, even when the accent is required to distinguish meaning. This trend reflects how digital writing often prioritizes speed and phonological similarity over orthographic accuracy, even in contexts where accents change grammatical role or lexical identity.</p>
 <ul>
-  <li>Co-founded organization promoting gender equity and leadership development for women.</li>
-  <li>Organized monthly meetings, community events, and member recruitment initiatives.</li>
+  <li>Very high usage of unaccented forms in casual blog-style writing</li>
+  <li>No usage of predicted feminine endings -aa and -aas, suggests morphological constraints on /d/ lenition</li>
+  <li><strong>Reduced masculine endings (-ao, -aos) are productive</strong> in casual Cuban online writing</li>
+  <li><strong>Accent omission is widespread</strong>, consistent with informal digital writing norms</li>
 </ul>
+<p>For <strong>next steps</strong>, I would be interested in compiling data from more casual social media postings, more casual than blogs and news. ZunZuneo (dissolved in 2012), FaceBook, or Twitter/X could have data more accurate to spoken Cuban Spanish patterns. </p>
 </section>
 </main>
 
